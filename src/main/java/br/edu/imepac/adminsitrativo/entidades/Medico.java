@@ -5,12 +5,14 @@ public class Medico {
     private String crm;
     private String nome;
     private String email;
+    private String especialidade;
 
     public Medico(int id, String crm, String nome, String email) {
         this.id = id;
         this.crm = crm;
         this.nome = nome;
         this.email = email;
+        this.especialidade = especialidade;
     }
 
     public int getId() {
@@ -43,5 +45,13 @@ public class Medico {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
     }
 }

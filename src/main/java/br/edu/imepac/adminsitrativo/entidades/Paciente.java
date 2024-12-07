@@ -3,17 +3,17 @@ package br.edu.imepac.adminsitrativo.entidades;
 import java.time.LocalDate;
 
 public class Paciente {
-    private int id;
+    private int id_paciente;
     private String cpf;
     private String nome;
-    private String email;
+    private String email ;
     private String telefone;
     private LocalDate dataNascimento; // Data de nascimento
     private String sexo;
 
 
     public Paciente(int id, String cpf, String nome, String email, String sexo, LocalDate dataNascimento, String telefone) {
-        this.id = id;
+        this.id_paciente = id;
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
@@ -47,12 +47,12 @@ public class Paciente {
         return dataNascimento;
     }
 
-    public int getId() {
-        return id;
+    public int getId_paciente() {
+        return id_paciente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_paciente(int id_paciente) {
+        this.id_paciente = id_paciente;
     }
 
     public String getCpf() {

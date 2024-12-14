@@ -1,6 +1,4 @@
-package br.edu.imepac.adminsitrativo.entidades;
-
-import br.edu.imepac.adminsitrativo.entidades.Endereco;
+package br.edu.imepac.entidades;
 
 public class Usuario {
         private Long id_usuario;
@@ -10,7 +8,6 @@ public class Usuario {
         private String senha;
         private String dataNascimento;
         private Long telefone;
-        private Endereco endereco;
         private boolean paciente;
 
         public void setId_usuario(Long id_usuario) {
@@ -69,13 +66,7 @@ public class Usuario {
             this.telefone = telefone;
         }
 
-        public Endereco getEndereco() {
-            return endereco;
-        }
 
-        public void setEndereco(Endereco endereco) {
-            this.endereco = endereco;
-        }
 
         public boolean isPaciente() {
             return paciente;

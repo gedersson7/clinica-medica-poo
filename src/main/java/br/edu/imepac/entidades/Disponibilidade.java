@@ -1,10 +1,7 @@
-package br.edu.imepac.agendamento.entidades;
-
-import br.edu.imepac.adminsitrativo.entidades.Medico;
+package br.edu.imepac.entidades;
 
 public class Disponibilidade {
         private Long id;
-        private Horario horario;
         private Medico medico;
         private String data;
 
@@ -14,14 +11,6 @@ public class Disponibilidade {
 
         public Long getId() {
             return id;
-        }
-
-        public Horario getHorario() {
-            return horario;
-        }
-
-        public void setHorario(Horario horario) {
-            this.horario = horario;
         }
 
         public Medico getMedico() {

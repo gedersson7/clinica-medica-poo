@@ -1,6 +1,4 @@
-package br.edu.imepac.agendamento.entidades;
-
-import br.edu.imepac.adminsitrativo.entidades.Paciente;
+package br.edu.imepac.entidades;
 
 public class Agendamento {
     private Long id;

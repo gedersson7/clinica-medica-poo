@@ -10,6 +10,8 @@ import br.edu.imepac.entidades.Paciente;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +24,7 @@ public class Form_paciente extends javax.swing.JFrame {
      */
     public Form_paciente() {
         initComponents();
+        preencherTabela();
     }
 
     /**
@@ -62,7 +65,7 @@ public class Form_paciente extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jT_listap = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -299,7 +302,7 @@ public class Form_paciente extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jT_listap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -318,7 +321,7 @@ public class Form_paciente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jT_listap);
 
         jButton7.setBackground(new java.awt.Color(7, 181, 95));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -383,14 +386,14 @@ public class Form_paciente extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lista de Pacientes", jPanel5);
@@ -403,7 +406,7 @@ public class Form_paciente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -432,7 +435,11 @@ public class Form_paciente extends javax.swing.JFrame {
     p.setSexo(jC_sexo.getSelectedItem().toString());
     PacienteDAO pdao= new PacienteDAO();
     pdao.cadastrar(p);
+    preencherTabela();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+  
+    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -462,9 +469,16 @@ public class Form_paciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jT_nomeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    public void preencherTabela(){
+        PacienteDAO pdao= new PacienteDAO();
+        List<Paciente> lista = pdao.listarTodos();
+        DefaultTableModel modeloTabela = (DefaultTableModel) jT_listap.getModel();
+        modeloTabela.setRowCount(0);
+        for (Paciente p : lista){
+            modeloTabela.addRow(new Object[]{p.getId_paciente(), p.getNome(), p.getCpf(), p.getEmail(),p.getTelefone(), p.getDatanasc(), p.getSexo()});
+        }
+    }
+
      public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -503,9 +517,9 @@ public class Form_paciente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jT_email;
+    private javax.swing.JTable jT_listap;
     private javax.swing.JTextField jT_nome;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables

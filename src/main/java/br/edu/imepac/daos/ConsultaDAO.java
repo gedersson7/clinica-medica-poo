@@ -39,7 +39,7 @@ public class ConsultaDAO {
         try (Connection con = ConectarBanco.getConectar();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setDate(1, Date.valueOf(consulta.getData()));
+            stmt.setString(1, consulta.getData());
             stmt.setString(2, consulta.getHoras());
             stmt.setInt(3, consulta.getPaciente().getId_paciente());
             stmt.setInt(4, consulta.getMedico().getId_medico());
@@ -85,7 +85,7 @@ public class ConsultaDAO {
             while (resultado.next()) {
                 Consulta consulta = new Consulta();
                 consulta.setId_consulta(resultado.getInt("consulta.id_consulta"));
-                consulta.setData(resultado.getDate("consulta.dataAtendimento").toLocalDate());
+                consulta.setData(resultado.getString("consulta.dataAtendimento"));
                 consulta.setHoras(resultado.getString("consulta.horario"));
 
                 Paciente paciente = new Paciente();
@@ -133,7 +133,7 @@ public class ConsultaDAO {
                 if (rs.next()) {
                     consulta = new Consulta();
                     consulta.setId_consulta(rs.getInt("consulta.id_consulta"));
-                    consulta.setData(rs.getDate("consulta.dataAtendimento").toLocalDate());
+                    consulta.setData(rs.getString("consulta.dataAtendimento"));
                     consulta.setHoras(rs.getString("consulta.horario"));
 
                     Paciente paciente = new Paciente();

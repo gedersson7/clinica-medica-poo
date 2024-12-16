@@ -6,6 +6,7 @@ package br.edu.imepac.administrativo.telas;
 
 import br.edu.imepac.daos.MedicoDAO;
 import br.edu.imepac.entidades.Medico;
+import br.edu.imepac.menu.Menu;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -110,6 +111,11 @@ public final class Form_Medico extends javax.swing.JFrame {
         jLabel7.setText("CRM.:");
 
         jT_id.setEditable(false);
+        jT_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_idActionPerformed(evt);
+            }
+        });
 
         try {
             jF_telefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
@@ -351,7 +357,7 @@ public final class Form_Medico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,8 +463,13 @@ public final class Form_Medico extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_alterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Menu m = new Menu();
+        m.setVisible(true);
+        dispose();     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jT_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jT_idActionPerformed
 
     public void preencherTabela(){
         MedicoDAO mdao = new MedicoDAO();

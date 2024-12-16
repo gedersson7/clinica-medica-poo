@@ -101,7 +101,7 @@
                               <Component id="jB_salvar" min="-2" pref="87" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jB_alterar" min="-2" pref="81" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -141,12 +141,10 @@
                           <Component id="jT_esp" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jB_alterar" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                              <Component id="jB_salvar" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jButton3" alignment="1" min="-2" pref="54" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jB_alterar" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="jB_salvar" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="jButton3" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   </Group>

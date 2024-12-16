@@ -7,16 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import br.edu.imepac.entidades.Paciente;
 import br.edu.imepac.utilitario.ConectarBanco;
 
+import javax.swing.*;
+
 public class PacienteDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(PacienteDAO.class.getName());
-
+    // Método para cadastrar um paciente
     public void cadastrar(Paciente p) {
         String sql = "INSERT INTO paciente (nome, cpf, email, dataNascimento, telefone, sexo) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection con = ConectarBanco.getConectar();
@@ -30,13 +29,13 @@ public class PacienteDAO {
             smt.setString(6, p.getSexo());
             smt.executeUpdate();
 
-            LOGGER.log(Level.INFO, "Paciente cadastrado com sucesso: {0}", p.getNome());
-
+            JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao cadastrar paciente: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar paciente: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    // Método para atualizar os dados de um paciente
     public void atualizar(Paciente p) {
         String sql = "UPDATE paciente SET nome = ?, cpf = ?, email = ?, datanasc = ?, telefone = ?, sexo = ? WHERE id_paciente = ?";
         try (Connection con = ConectarBanco.getConectar();
@@ -51,28 +50,31 @@ public class PacienteDAO {
             smt.setInt(7, p.getId_paciente());
             smt.executeUpdate();
 
-            LOGGER.log(Level.INFO, "Paciente atualizado com sucesso: {0}", p.getNome());
-
+            JOptionPane.showMessageDialog(null, "Paciente atualizado com sucesso!");
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao atualizar paciente: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar paciente: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    // Método para excluir um paciente
     public void excluir(Paciente p) {
         String sql = "DELETE FROM paciente WHERE id_paciente = ?";
-        try (Connection con = ConectarBanco.getConectar();
-             PreparedStatement smt = con.prepareStatement(sql)) {
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o paciente " + p.getNome() + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (opcao == JOptionPane.YES_OPTION) {
+            try (Connection con = ConectarBanco.getConectar();
+                 PreparedStatement smt = con.prepareStatement(sql)) {
 
-            smt.setInt(1, p.getId_paciente());
-            smt.executeUpdate();
+                smt.setInt(1, p.getId_paciente());
+                smt.executeUpdate();
 
-            LOGGER.log(Level.INFO, "Paciente excluído com sucesso: {0}", p.getNome());
-
-        } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao excluir paciente: {0}", ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Paciente excluído com sucesso!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir paciente: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
+    // Método para listar todos os pacientes
     public List<Paciente> listarTodos() {
         String sql = "SELECT * FROM paciente ORDER BY nome";
         List<Paciente> lista = new ArrayList<>();
@@ -93,10 +95,9 @@ public class PacienteDAO {
                 lista.add(p);
             }
 
-            LOGGER.log(Level.INFO, "Pacientes listados com sucesso. Total: {0}", lista.size());
-
+            JOptionPane.showMessageDialog(null, "Lista de pacientes obtida com sucesso! Total: " + lista.size());
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao listar pacientes: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao listar pacientes: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
         return lista;

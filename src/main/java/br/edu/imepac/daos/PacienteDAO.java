@@ -17,7 +17,7 @@ public class PacienteDAO {
 
     // Método para cadastrar um paciente
     public void cadastrar(Paciente p) {
-        String sql = "INSERT INTO paciente (nome, cpf, email, dataNascimento, telefone, sexo) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO paciente (nome, cpf, email, dataNasc, telefone, sexo) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection con = ConectarBanco.getConectar();
              PreparedStatement smt = con.prepareStatement(sql)) {
 
@@ -37,7 +37,7 @@ public class PacienteDAO {
 
     // Método para atualizar os dados de um paciente
     public void atualizar(Paciente p) {
-        String sql = "UPDATE paciente SET nome = ?, cpf = ?, email = ?, datanasc = ?, telefone = ?, sexo = ? WHERE id_paciente = ?";
+        String sql = "UPDATE paciente SET nome = ?, cpf = ?, email = ?, dataNascimento = ?, telefone = ?, sexo = ? WHERE id_paciente = ?";
         try (Connection con = ConectarBanco.getConectar();
              PreparedStatement smt = con.prepareStatement(sql)) {
 
@@ -89,7 +89,7 @@ public class PacienteDAO {
                 p.setNome(resultado.getString("nome"));
                 p.setCpf(resultado.getString("cpf"));
                 p.setEmail(resultado.getString("email"));
-                p.setDatanasc(resultado.getDate("dataNasc").toLocalDate()); // Usando LocalDate
+                p.setDatanasc(resultado.getDate("dataNascimento").toLocalDate()); // Usando LocalDate
                 p.setTelefone(resultado.getString("telefone"));
                 p.setSexo(resultado.getString("sexo"));
                 lista.add(p);

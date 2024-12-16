@@ -1,26 +1,19 @@
 package br.edu.imepac.daos;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import br.edu.imepac.entidades.Consulta;
 import br.edu.imepac.entidades.Funcionario;
 import br.edu.imepac.entidades.Paciente;
-import br.edu.imepac.utilitario.ConectarBanco;
 import br.edu.imepac.entidades.Medico;
+import br.edu.imepac.utilitario.ConectarBanco;
 
+import javax.swing.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConsultaDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(ConsultaDAO.class.getName());
-
+    // Método para cadastrar uma nova consulta
     public void cadastrar(Consulta consulta) {
         String sql = "INSERT INTO consulta (dataAtendimento, horario, id_paciente, id_medico, id_funcionario) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = ConectarBanco.getConectar();
@@ -33,13 +26,14 @@ public class ConsultaDAO {
             stmt.setInt(5, consulta.getFuncionario().getId_funcionario());
 
             stmt.executeUpdate();
-            LOGGER.log(Level.INFO, "Consulta cadastrada com sucesso: {0}", consulta);
+            JOptionPane.showMessageDialog(null, "Consulta cadastrada com sucesso!");
 
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao cadastrar consulta: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar consulta: " + ex.getMessage());
         }
     }
 
+    // Método para atualizar uma consulta
     public void atualizar(Consulta consulta) {
         String sql = "UPDATE consulta SET dataAtendimento = ?, horario = ?, id_paciente = ?, id_medico = ?, id_funcionario = ? WHERE id_consulta = ?";
         try (Connection con = ConectarBanco.getConectar();
@@ -53,13 +47,14 @@ public class ConsultaDAO {
             stmt.setInt(6, consulta.getId_consulta());
 
             stmt.executeUpdate();
-            LOGGER.log(Level.INFO, "Consulta atualizada com sucesso: {0}", consulta);
+            JOptionPane.showMessageDialog(null, "Consulta atualizada com sucesso!");
 
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao atualizar consulta: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar consulta: " + ex.getMessage());
         }
     }
 
+    // Método para excluir uma consulta
     public void excluir(Consulta consulta) {
         String sql = "DELETE FROM consulta WHERE id_consulta = ?";
         try (Connection con = ConectarBanco.getConectar();
@@ -67,13 +62,14 @@ public class ConsultaDAO {
 
             stmt.setInt(1, consulta.getId_consulta());
             stmt.executeUpdate();
-            LOGGER.log(Level.INFO, "Consulta excluída com sucesso: {0}", consulta);
+            JOptionPane.showMessageDialog(null, "Consulta excluída com sucesso!");
 
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao excluir consulta: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao excluir consulta: " + ex.getMessage());
         }
     }
 
+    // Método para listar todas as consultas
     public List<Consulta> listarTodas() {
         String sql = "SELECT * FROM consulta " +
                 "INNER JOIN paciente ON paciente.id_paciente = consulta.id_paciente " +
@@ -89,7 +85,7 @@ public class ConsultaDAO {
             while (resultado.next()) {
                 Consulta consulta = new Consulta();
                 consulta.setId_consulta(resultado.getInt("consulta.id_consulta"));
-                consulta.setData(resultado.getDate("consultaNasc").toLocalDate());
+                consulta.setData(resultado.getDate("consulta.dataAtendimento").toLocalDate());
                 consulta.setHoras(resultado.getString("consulta.horario"));
 
                 Paciente paciente = new Paciente();
@@ -98,10 +94,9 @@ public class ConsultaDAO {
                 consulta.setPaciente(paciente);
 
                 Medico medico = new Medico();
-                medico.setId_medico(resultado.getInt("medico.id_medico")); // Define o ID corretamente
-                medico.setNome_medico(resultado.getString("medico.nome")); // Define o nome corretamente
-                consulta.setMedico(medico); // Define o médico na consulta
-
+                medico.setId_medico(resultado.getInt("medico.id_medico"));
+                medico.setNome_medico(resultado.getString("medico.nome"));
+                consulta.setMedico(medico);
 
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId_funcionario(resultado.getInt("funcionario.id_funcionario"));
@@ -111,15 +106,16 @@ public class ConsultaDAO {
                 lista.add(consulta);
             }
 
-            LOGGER.log(Level.INFO, "Consultas listadas com sucesso. Total: {0}", lista.size());
+            JOptionPane.showMessageDialog(null, "Consultas listadas com sucesso. Total: " + lista.size());
 
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao listar consultas: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao listar consultas: " + ex.getMessage());
         }
 
         return lista;
     }
 
+    // Método para buscar uma consulta por ID
     public Consulta buscarPorID(int idConsulta) {
         String sql = "SELECT * FROM consulta " +
                 "INNER JOIN paciente ON paciente.id_paciente = consulta.id_paciente " +
@@ -157,10 +153,10 @@ public class ConsultaDAO {
                 }
             }
 
-            LOGGER.log(Level.INFO, "Consulta buscada com sucesso: {0}", consulta);
+            JOptionPane.showMessageDialog(null, "Consulta buscada com sucesso!");
 
         } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Erro ao buscar consulta por ID: {0}", ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar consulta por ID: " + ex.getMessage());
         }
 
         return consulta;

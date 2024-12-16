@@ -26,11 +26,9 @@ public class MedicoDAO {
             smt.setString(4, m.getTelefone());
             smt.setString(5, m.getEspecializacao());
             smt.executeUpdate();
-            smt.close();
-            con.close();
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            LOGGER.info("Médico cadastrado com sucesso: " + m.getNome_medico());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar o registro!");
+            LOGGER.log(Level.SEVERE, "Erro ao cadastrar o médico: {0}", ex.getMessage());
         }
     }
 
@@ -44,11 +42,9 @@ public class MedicoDAO {
             smt.setString(5, m.getEspecializacao());
             smt.setInt(6, m.getId_medico());
             smt.executeUpdate();
-            smt.close();
-            con.close();
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            LOGGER.info("Médico atualizado com sucesso: " + m.getNome_medico());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir o registro "+ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Erro ao atualizar o médico: {0}", ex.getMessage());
         }
     }
 
@@ -59,15 +55,14 @@ public class MedicoDAO {
             try (Connection con = ConectarBanco.getConectar(); PreparedStatement smt = con.prepareStatement(sql)) {
                 smt.setInt(1, m.getId_medico());
                 smt.executeUpdate();
-                smt.close();
-                con.close();
-                JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+                LOGGER.info("Médico excluído com sucesso: " + m.getNome_medico());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao excluir o registro " + ex.getMessage());
+                LOGGER.log(Level.SEVERE, "Erro ao excluir o médico: {0}", ex.getMessage());
             }
         }
     }
-        public List<Medico>listarTodos() {
+
+    public List<Medico> listarTodos() {
         String sql = "SELECT * FROM medico ORDER BY nome";
         List<Medico> listaMedico = new ArrayList<>();
         try (Connection con = ConectarBanco.getConectar(); PreparedStatement smt = con.prepareStatement(sql); ResultSet resultado = smt.executeQuery()) {
@@ -81,11 +76,10 @@ public class MedicoDAO {
                 m.setEspecializacao(resultado.getString("especializacao"));
                 listaMedico.add(m);
             }
-            smt.close();
-            con.close();
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Erro ao buscar os registros");
+            LOGGER.info("Lista de médicos obtida com sucesso.");
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Erro ao listar os médicos: {0}", ex.getMessage());
         }
-            return listaMedico;
-        }
+        return listaMedico;
     }
+}

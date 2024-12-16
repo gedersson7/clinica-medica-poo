@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +26,7 @@ public class Form_paciente extends javax.swing.JFrame {
     public Form_paciente() {
         initComponents();
         preencherTabela();
+        jB_atualizar.setVisible(false);
     }
 
     /**
@@ -44,7 +46,7 @@ public class Form_paciente extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jT_id = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jT_nome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -57,8 +59,8 @@ public class Form_paciente extends javax.swing.JFrame {
         jF_telefone = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jC_sexo = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jB_salvar = new javax.swing.JButton();
+        jB_atualizar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -116,10 +118,10 @@ public class Form_paciente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("ID:");
 
-        jTextField1.setEditable(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jT_id.setEditable(false);
+        jT_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jT_idActionPerformed(evt);
             }
         });
 
@@ -173,23 +175,23 @@ public class Form_paciente extends javax.swing.JFrame {
         jC_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", " " }));
         jC_sexo.setSelectedIndex(-1);
 
-        jButton1.setBackground(new java.awt.Color(7, 181, 95));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jB_salvar.setBackground(new java.awt.Color(7, 181, 95));
+        jB_salvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jB_salvar.setForeground(new java.awt.Color(255, 255, 255));
+        jB_salvar.setText("Salvar");
+        jB_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jB_salvarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(7, 181, 95));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Atualizar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jB_atualizar.setBackground(new java.awt.Color(7, 181, 95));
+        jB_atualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jB_atualizar.setForeground(new java.awt.Color(255, 255, 255));
+        jB_atualizar.setText("Atualizar");
+        jB_atualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jB_atualizarActionPerformed(evt);
             }
         });
 
@@ -217,7 +219,7 @@ public class Form_paciente extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jT_id, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jT_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -247,9 +249,9 @@ public class Form_paciente extends javax.swing.JFrame {
                         .addComponent(jF_data, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(109, 109, 109)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jB_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jB_atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -261,7 +263,7 @@ public class Form_paciente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jT_id, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -285,8 +287,8 @@ public class Form_paciente extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
@@ -417,11 +419,11 @@ public class Form_paciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jF_cpfActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jT_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jT_idActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDate data = LocalDate.parse(jF_data.getText(), formatter);
 
@@ -436,17 +438,42 @@ public class Form_paciente extends javax.swing.JFrame {
     PacienteDAO pdao= new PacienteDAO();
     pdao.cadastrar(p);
     preencherTabela();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jB_salvarActionPerformed
 
   
     
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jB_atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_atualizarActionPerformed
+     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDate data = LocalDate.parse(jF_data.getText(), formatter);
+
+       
+    Paciente p = new Paciente ();
+    p.setId_paciente(Integer.parseInt(jT_id.getText()));
+    p.setNome(jT_nome.getText());
+    p.setEmail(jT_email.getText());
+    p.setCpf(jF_cpf.getText());
+    p.setTelefone(jF_telefone.getText());
+    p.setDatanasc(data);
+    p.setSexo(jC_sexo.getSelectedItem().toString());
+    PacienteDAO pdao= new PacienteDAO();
+    pdao.atualizar(p);
+    preencherTabela();
+    jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jB_atualizarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        jT_id.setText(null);
+        jT_nome.setText(null);
+        jT_email.setText(null);
+        jF_cpf.setText(null);
+        jF_data.setText(null);
+        jF_telefone.setText(null);
+        jC_sexo.setSelectedItem(-1);
+        jB_atualizar.setVisible(false);
+        jB_salvar.setVisible(true);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -454,15 +481,57 @@ public class Form_paciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+ int opcao = jT_listap.getSelectedRow();
+        if (opcao>= 0){
+           Paciente p = new Paciente();
+         p.setId_paciente(Integer.parseInt(jT_listap.getValueAt(opcao, 0).toString()));
+         p.setNome(jT_listap.getValueAt(opcao, 1).toString());
+         p.setCpf(jT_listap.getValueAt(opcao, 2).toString());
+         p.setEmail(jT_listap.getValueAt(opcao, 3).toString());
+         p.setTelefone(jT_listap.getValueAt(opcao, 4).toString());
+        String dataString = jT_listap.getValueAt(opcao, 5).toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataNasc = LocalDate.parse(dataString, formatter);
+        p.setDatanasc(dataNasc);
+         p.setSexo(jT_listap.getValueAt(opcao, 6).toString());
+      
+         PacienteDAO pdao = new PacienteDAO();
+         pdao.excluir(p);
+         preencherTabela();
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma linha!");
+        }    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        int opcao = jT_listap.getSelectedRow();
+        if (opcao>= 0){
+         jT_id.setText(jT_listap.getValueAt(opcao, 0).toString());
+         jT_nome.setText(jT_listap.getValueAt(opcao, 1).toString());
+         jF_cpf.setText(jT_listap.getValueAt(opcao, 2).toString());
+         jT_email.setText(jT_listap.getValueAt(opcao, 3).toString());
+         jF_telefone.setText(jT_listap.getValueAt(opcao, 4).toString());
+         jF_data.setText(jT_listap.getValueAt(opcao, 5).toString());
+         jC_sexo.setSelectedItem(jT_listap.getValueAt(opcao, 6).toString());
+         jTabbedPane1.setSelectedIndex(0);
+         jB_atualizar.setVisible(true);
+         jB_salvar.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma linha!");
+        }
+          
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+jT_id.setText(null);
+        jT_nome.setText(null);
+        jT_email.setText(null);
+        jF_cpf.setText(null);
+        jF_data.setText(null);
+        jF_telefone.setText(null);
+        jC_sexo.setSelectedItem(-1);
+        jB_atualizar.setVisible(false);
+        jB_salvar.setVisible(true);
+        jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jT_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_nomeActionPerformed
@@ -489,8 +558,8 @@ public class Form_paciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jB_atualizar;
+    private javax.swing.JButton jB_salvar;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
@@ -517,10 +586,10 @@ public class Form_paciente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jT_email;
+    private javax.swing.JTextField jT_id;
     private javax.swing.JTable jT_listap;
     private javax.swing.JTextField jT_nome;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

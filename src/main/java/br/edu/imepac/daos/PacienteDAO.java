@@ -37,10 +37,10 @@ public class PacienteDAO {
     }
 
     public void atualizar(Paciente p) {
-        String sql = "UPDATE paciente SET nome = ?, cpf = ?, email = ?, datanasc = ?, telefone = ?, sexo = ? WHERE id_paciente = ?";
+        String sql = "UPDATE paciente SET nome = ?, cpf = ?, email = ?, dataNascimento = ?, telefone = ?, sexo = ? WHERE id_paciente = ?";
         try (Connection con = ConectarBanco.getConectar();
              PreparedStatement smt = con.prepareStatement(sql)) {
-
+                      
             smt.setString(1, p.getNome());
             smt.setString(2, p.getCpf());
             smt.setString(3, p.getEmail());
@@ -59,6 +59,7 @@ public class PacienteDAO {
 
     public void excluir(Paciente p) {
         String sql = "DELETE FROM paciente WHERE id_paciente = ?";
+        
         try (Connection con = ConectarBanco.getConectar();
              PreparedStatement smt = con.prepareStatement(sql)) {
 
@@ -72,7 +73,7 @@ public class PacienteDAO {
         }
     }
 
-    public List<Paciente> listarTodos() {
+    public List<Paciente> listarTodos () {
         String sql = "SELECT * FROM paciente ORDER BY nome";
         List<Paciente> lista = new ArrayList<>();
 

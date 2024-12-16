@@ -67,6 +67,7 @@ public class Usuario {
         }
 
 
+
         public boolean isPaciente() {
             return paciente;
         }

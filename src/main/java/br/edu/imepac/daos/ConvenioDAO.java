@@ -3,12 +3,15 @@ package br.edu.imepac.daos;
 import br.edu.imepac.entidades.Convenio;
 import br.edu.imepac.utilitario.ConectarBanco;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConvenioDAO {
+
+    private static final Logger LOGGER = Logger.getLogger(ConvenioDAO.class.getName());
 
     // Método para cadastrar um novo convenio
     public void cadastrar(Convenio convenio) {
@@ -22,10 +25,10 @@ public class ConvenioDAO {
             stmt.setDouble(4, convenio.getCobertura());
 
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Convênio cadastrado com sucesso!");
+            LOGGER.log(Level.INFO, "Convênio cadastrado com sucesso: {0}", convenio);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar convênio: " + ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Erro ao cadastrar convênio: {0}", ex.getMessage());
         }
     }
 
@@ -42,10 +45,10 @@ public class ConvenioDAO {
             stmt.setInt(5, convenio.getId());
 
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Convênio atualizado com sucesso!");
+            LOGGER.log(Level.INFO, "Convênio atualizado com sucesso: {0}", convenio);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar convênio: " + ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Erro ao atualizar convênio: {0}", ex.getMessage());
         }
     }
 
@@ -57,10 +60,10 @@ public class ConvenioDAO {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Convênio excluído com sucesso. ID: " + id);
+            LOGGER.log(Level.INFO, "Convênio excluído com sucesso. ID: {0}", id);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir convênio: " + ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Erro ao excluir convênio: {0}", ex.getMessage());
         }
     }
 
@@ -83,10 +86,10 @@ public class ConvenioDAO {
                 convenios.add(convenio);
             }
 
-            JOptionPane.showMessageDialog(null, "Convenios listados com sucesso. Total: " + convenios.size());
+            LOGGER.log(Level.INFO, "Convenios listados com sucesso. Total: {0}", convenios.size());
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar convênios: " + ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Erro ao listar convênios: {0}", ex.getMessage());
         }
         return convenios;
     }
@@ -110,10 +113,10 @@ public class ConvenioDAO {
                 }
             }
 
-            JOptionPane.showMessageDialog(null, "Convênio buscado com sucesso!");
+            LOGGER.log(Level.INFO, "Convênio buscado com sucesso: {0}", convenio);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar convênio por ID: " + ex.getMessage());
+            LOGGER.log(Level.SEVERE, "Erro ao buscar convênio por ID: {0}", ex.getMessage());
         }
         return convenio;
     }

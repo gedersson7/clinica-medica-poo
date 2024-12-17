@@ -14,8 +14,8 @@ public class Funcionario {
         }
 
         public void setId_funcionario(int id_funcionario) {
-            this.id_funcionario = id_funcionario;
-        }
+        this.id_funcionario = id_funcionario;
+    }
 
         public String getNome() {
             return nome;

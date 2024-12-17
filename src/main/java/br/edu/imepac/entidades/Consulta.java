@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Consulta {
         private int id_consulta;
-        private LocalDate data;
+        private String data;
         private String horas;
         private Funcionario funcionario;
         private Medico medico;
@@ -18,11 +18,11 @@ public class Consulta {
             this.id_consulta = id_consulta;
         }
 
-        public LocalDate getData() {
+        public String getData() {
             return data;
         }
 
-        public void setData(LocalDate data) {
+        public void setData(String data) {
             this.data = data;
         }
 
